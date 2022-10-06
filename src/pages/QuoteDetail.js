@@ -1,5 +1,6 @@
-import { useParams } from 'react-router-dom';
+import { Link, Route, useParams } from 'react-router-dom';
 import HighlightedQuote from '../components/quotes/HighlightedQuote';
+import Comments from '../components/comments/Comments';
 const DUMMY_QUOTES = [
   {
     id: 'q1',
@@ -25,6 +26,16 @@ const QuoteDetail = () => {
   return (
     <>
       <HighlightedQuote text={quote.text} author={quote.author} />
+      <Route path={`/quotes/${quoteId}`} exact>
+        <div className='centered'>
+          <Link to={`/quotes/${quoteId}/comments`} className='btn--flat'>
+            Load Comments
+          </Link>
+        </div>
+      </Route>
+      <Route path={`/quotes/${quoteId}/comments`}>
+        <Comments />
+      </Route>
     </>
   );
 };
